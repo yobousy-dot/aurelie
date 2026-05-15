@@ -28,6 +28,13 @@
       background-repeat: repeat;
     }
 
+    /* --- MOBILE OPTIMISATION --- */
+    @media (max-width: 600px) {
+      h1 { font-size: 1.7rem; }
+      p { font-size: 1.1rem; }
+      .logo { width: 70px; height: 70px; }
+    }
+
     .logo {
       width: 90px;
       height: 90px;
@@ -37,19 +44,9 @@
       margin-bottom: 10px;
     }
 
-    h1 {
-      font-size: 2.2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      margin-top: 0;
-      margin-bottom: 1.5rem;
-    }
-
     .video-container {
-      width: 320px;
-      max-width: 90vw;
+      width: 90vw;
+      max-width: 500px;
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
@@ -65,11 +62,11 @@
     .cake-button {
       border: none;
       cursor: pointer;
-      padding: 15px 25px;
+      padding: 20px 35px;
       border-radius: 999px;
       background: linear-gradient(135deg, #ff80bf, #ffcc66);
       color: #4a0033;
-      font-size: 1rem;
+      font-size: 1.3rem;
       font-weight: bold;
       display: inline-flex;
       align-items: center;
@@ -84,18 +81,19 @@
     }
 
     .cake-emoji {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
     }
 
+    /* --- BULLE --- */
     .message-bulle {
-      max-width: 300px;
+      max-width: 90vw;
       background: rgba(255, 255, 255, 0.75);
       backdrop-filter: blur(6px);
-      padding: 15px 20px;
+      padding: 20px;
       border-radius: 20px;
       margin-top: 20px;
-      font-size: 0.95rem;
-      line-height: 1.4;
+      font-size: 1.1rem;
+      line-height: 1.5;
       color: #7b1f4a;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       border: 2px solid rgba(255, 182, 210, 0.4);
@@ -109,7 +107,7 @@
       opacity: 1;
     }
 
-    /* Canvas des feux d’artifice */
+    /* --- FEUX D’ARTIFICE --- */
     #fireworks {
       position: fixed;
       top: 0;
@@ -159,8 +157,12 @@
     const canvas = document.getElementById('fireworks');
     const ctx = canvas.getContext('2d');
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
 
     let isPlaying = false;
     let particles = [];
