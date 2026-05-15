@@ -28,7 +28,6 @@
       background-repeat: repeat;
     }
 
-    /* --- MOBILE OPTIMISATION --- */
     @media (max-width: 600px) {
       h1 { font-size: 1.7rem; }
       p { font-size: 1.1rem; }
@@ -44,9 +43,10 @@
       margin-bottom: 10px;
     }
 
+    /* VIDÉO TRÈS GRANDE SUR TÉLÉPHONE */
     .video-container {
-      width: 90vw;
-      max-width: 500px;
+      width: 95vw;
+      max-width: 600px;
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
@@ -84,7 +84,6 @@
       font-size: 1.6rem;
     }
 
-    /* --- BULLE --- */
     .message-bulle {
       max-width: 90vw;
       background: rgba(255, 255, 255, 0.75);
@@ -107,7 +106,6 @@
       opacity: 1;
     }
 
-    /* --- FEUX D’ARTIFICE --- */
     #fireworks {
       position: fixed;
       top: 0;
@@ -127,7 +125,7 @@
   <img src="logo.jpeg" alt="logo" class="logo">
 
   <h1>🎂 Joyeux anniversaire Aurélie 🎂</h1>
-  <p>Appuie sur le gâteau pour lancer la danse sucrée&nbsp;!</p>
+  <p>UNE SOIREE RIEN QUE POUR TOI&nbsp;!</p>
 
   <div class="video-container">
     <video id="videoAurélie" muted>
@@ -167,11 +165,14 @@
     let isPlaying = false;
     let particles = [];
 
+    /* VIDÉO QUI TOURNE JUSQU’À LA FIN DE LA MUSIQUE */
+    video.loop = true;
+
     function updateStatus() {
       if (isPlaying) {
         statusText.textContent =
           "Joyeux anniversaire, belle âme sucrée.\n" +
-          "Que ta journée soit pleine de douceur, de danse, de magie…\n" +
+          "Que ta soirée soit pleine de douceur, de danse, de magie…\n" +
           "et de gâteaux qui n’ont aucune chance de survivre. 🎂";
         statusText.classList.add("message-visible");
       } else {
@@ -180,7 +181,6 @@
       }
     }
 
-    /* --- FEUX D’ARTIFICE --- */
     function createFirework() {
       const x = Math.random() * canvas.width;
       const y = Math.random() * canvas.height * 0.5;
@@ -220,7 +220,6 @@
       if (isPlaying) createFirework();
     }, 500);
 
-    /* --- BOUTON --- */
     cakeButton.addEventListener('click', () => {
       if (!isPlaying) {
         audio.currentTime = 0;
