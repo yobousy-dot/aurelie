@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Joyeux anniversaire Aurélie</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle, #ffe6f2, #ffb3d9);
+      font-family: "Comic Sans MS", system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      color: #7b1f4a;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .video-container {
+      width: 320px;
+      max-width: 90vw;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      margin-bottom: 1.5rem;
+      background: #000;
+    }
+
+    video {
+      width: 100%;
+      display: block;
+    }
+
+    .cake-button {
+      border: none;
+      cursor: pointer;
+      padding: 15px 25px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff80bf, #ffcc66);
+      color: #4a0033;
+      font-size: 1rem;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 6px 0 #cc5a8f;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+
+    .cake-button:active {
+      transform: translateY(3px);
+      box-shadow: 0 3px 0 #cc5a8f;
+    }
+
+    .cake-emoji {
+      font-size: 1.4rem;
+    }
+
+    .status {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎂 Joyeux anniversaire Aurélie 🎂</h1>
+  <p>Appuie sur le gâteau pour lancer la danse sucrée&nbsp;!</p>
+
+  <div class="video-container">
+    <video id="videoAurélie" muted>
+      <source src="aurelie.mp4" type="video/mp4">
+      Ton navigateur ne supporte pas la vidéo.
+    </video>
+  </div>
+
+  <button id="cakeButton" class="cake-button">
+    <span class="cake-emoji">🎂</span>
+    <span id="buttonText">ON</span>
+  </button>
+
+  <div class="status" id="statusText">
+    Vidéo et musique arrêtées.
+  </div>
+
+  <audio id="audioAurélie">
+    <source src="aurelie.mp3" type="audio/mpeg">
+    Ton navigateur ne supporte pas l’audio.
+  </audio>
+
+  <script>
+    const video = document.getElementById('videoAurélie');
+    const audio = document.getElementById('audioAurélie');
+    const cakeButton = document.getElementById('cakeButton');
+    const buttonText = document.getElementById('buttonText');
+    const statusText = document.getElementById('statusText');
+
+    // La vidéo doit boucler tant que la musique n’est pas finie
+    video.loop = true;
+
+    let isPlaying = false;
+
+    function updateStatus() {
+      if (isPlaying) {
+        statusText.textContent = "La vidéo tourne en boucle et la chanson joue 🎶";
+      } else {
+        statusText.textContent = "Vidéo et musique arrêtées.";
+      }
+    }
+
+    cakeButton.addEventListener('click', () => {
+      if (!isPlaying) {
+        // ON : on lance la musique et la vidéo
+        audio.currentTime = 0;
+        video.currentTime = 0;
+        audio.play();
+        video.play();
+        isPlaying = true;
+        buttonText.textContent = "OFF";
+        updateStatus();
+      } else {
+        // OFF : on arrête tout
+        audio.pause();
+        video.pause();
+        isPlaying = false;
+        buttonText.textContent = "ON";
+        updateStatus();
+      }
+    });
+
+    // Quand la musique est finie, on arrête la vidéo et on remet le bouton sur OFF
+    audio.addEventListener('ended', () => {
+      video.pause();
+      video.currentTime = 0;
+      isPlaying = false;
+      buttonText.textContent = "ON";
+      updateStatus();
+    });
+  </script>
+
+</body>
+</html>
